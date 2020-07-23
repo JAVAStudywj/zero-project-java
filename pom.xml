@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>zero-parent</groupId>
+    <artifactId>zero-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>zero-common</module>
+        <module>zero-platform</module>
+        <module>zero-registry</module>
+        <module>zero-gateway</module>
+        <module>zero-core</module>
+    </modules>
+    <!--版本管理-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <mapper.starter.version>2.1.5</mapper.starter.version>
+        <mysql.version>8.0.18</mysql.version>
+        <pageHelper.starter.version>1.2.13</pageHelper.starter.version>
+        <fastdfs.client.version>1.26.7</fastdfs.client.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <aliyun.sdk.version>4.5.0</aliyun.sdk.version>
+        <aliyun.dysmsapi.version>2.1.0</aliyun.dysmsapi.version>
+        <hutool-all.version>5.3.7</hutool-all.version>
+        <swagger-version>2.6.1</swagger-version>
+        <jetcache-version>2.5.9</jetcache-version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring cloud 管理-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--通用Mapper启动器-->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper.starter.version}</version>
+            </dependency>
+            <!-- 分页助手启动器 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pageHelper.starter.version}</version>
+            </dependency>
+            <!--mysql 连接池配置-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+<!--            &lt;!&ndash;  fastdfs客户端 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.github.tobato</groupId>-->
+<!--                <artifactId>fastdfs-client</artifactId>-->
+<!--                <version>${fastdfs.client.version}</version>-->
+<!--            </dependency>-->
+            <!-- JSON处理依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- 阿里去短信 -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>${aliyun.dysmsapi.version}</version>
+            </dependency>
+            <!-- hutool 工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+            <!-- Swagger核心包 start -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+            <!-- jetcache -->
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis</artifactId>
+                <version>${jetcache-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+    </dependencies>
+
+    <!-- 指定仓库 -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>http://192.168.2.130:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <!-- 指定插件仓库 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>http://192.168.2.130:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <!-- 项目发布 -->
+    <distributionManagement>
+        <repository>
+            <id>user-releases</id>
+            <name>user-releases</name>
+            <url>http://192.168.2.130:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>user-snapshots</id>
+            <name>user-snapshots</name>
+            <url>http://192.168.2.130:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

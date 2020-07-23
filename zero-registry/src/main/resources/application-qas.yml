@@ -1,0 +1,20 @@
+####################   测试机 服务注册配置信息   ##############################
+spring:
+  application:
+    name: registry-server
+
+#eureka客户端注册配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    #是否注册自己
+    register-with-eureka: false
+    #是否拉取
+    fetch-registry: false
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    #注册时间 1最小心跳时间 2最小过期时间
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90

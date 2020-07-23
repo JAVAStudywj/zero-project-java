@@ -1,0 +1,58 @@
+####################   测试机 服务注册配置信息   ##############################
+spring:
+  application:
+    name: gateway-server
+
+#eureka客户端注册配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10080/eureka
+  #IP地址管理
+  instance:
+    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+#zuul 路由配置
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true #zuul饥饿加载
+  host:
+    connect-timeout-millis: 60000 #HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 60000   #socket超时
+    max-total-connections: 500
+  prefix: /api #添加路由前缀
+  routes:
+    platform-server:
+      serviceId: platform-server
+      path: /platform/**
+    finance-server:
+      serviceId: finance-server
+      path: /finance/**
+    upload-server:
+      serviceId: upload-server
+      service: upload-server
+      path: /upload/**
+  #      strip-prefix: false #屏蔽前缀 upload
+  #禁止访问
+  # ignored-services:
+  # - goods-server
+
+  #解决Authorization请求头丢失的问题
+  sensitive-headers:
+
+#配置Ribbon的超时时间
+ribbon:
+  ReadTimeout: 60000 #读取超时时长
+  ConnectionTimeout: 60000 #超时时长
+  MaxAutoRetries: 1 #当前服务器重试次数
+  MaxAutoRetriesNextServer: 0 #切换服务器重试次数
+
+#hystrix 熔断机制与降级保护
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000 #配置hystrix的超时时间

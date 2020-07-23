@@ -1,0 +1,71 @@
+####################   开发机 服务注册配置信息   ##############################
+spring:
+  application:
+    name: platform-server
+  #数据库连接池
+  datasource:
+    #开发机
+    url: jdbc:mysql://127.0.0.1:50002/platform?useSSL=true&serverTimezone=GMT&useUnicode=true&amp&characterEncoding=utf-8
+    username: root
+    password: EhCCyjgr2wMvlGy6
+#    url: jdbc:mysql://47.111.176.185:3306/finance?useSSL=true&serverTimezone=GMT&useUnicode=true&amp&characterEncoding=utf-8
+#    username: finance
+#    password: 1234qwerASDF
+  #REDIS配置信息
+  redis:
+    # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 3
+    # redis服务器地址（默认为localhost）
+    host: localhost
+    # redis端口（默认为6379）
+    port: 6379
+    # redis访问密码（默认为空）
+    password: 123456
+    # redis连接超时时间（单位为毫秒）
+    timeout: 1000
+#    # redis连接池配置
+#    jedis:
+#      pool:
+#       # 最大可用连接数（默认为8，负数表示无限）
+#          max-active: 8
+#          # 最大空闲连接数（默认为8，负数表示无限）
+#          max-idle: 8
+#          # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+#          min-idle: 0
+#          # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+#          max-wait: -1
+
+mybatis:
+  type-aliases-package: com.zero.platfrom.entity
+  configuration:
+    #sql打印日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#eureka客户端注册配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10080/eureka
+  #IP地址管理
+  instance:
+    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+
+
+#配置Ribbon的超时时间
+ribbon:
+  ReadTimeout: 60000 #读取超时时长
+  ConnectionTimeout: 60000 #超时时长
+  MaxAutoRetries: 1 #当前服务器重试次数
+  MaxAutoRetriesNextServer: 0 #切换服务器重试次数
+
+#hystrix 熔断机制与降级保护
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000 #配置hystrix的超时时间
+
+token: "Authorization"

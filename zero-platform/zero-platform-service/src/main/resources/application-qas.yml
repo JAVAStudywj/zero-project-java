@@ -1,0 +1,26 @@
+####################   测试机 服务注册配置信息   ##############################
+#eureka客户端注册配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10080/eureka
+  #IP地址管理
+  instance:
+    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+
+#配置Ribbon的超时时间
+ribbon:
+  ReadTimeout: 60000 #读取超时时长
+  ConnectionTimeout: 60000 #超时时长
+  MaxAutoRetries: 1 #当前服务器重试次数
+  MaxAutoRetriesNextServer: 0 #切换服务器重试次数
+
+#hystrix 熔断机制与降级保护
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000 #配置hystrix的超时时间
