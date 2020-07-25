@@ -22,7 +22,7 @@ public interface MenuMapper extends Mapper<MenuEntity> {
             "from sys_t_role_menu a inner join sys_t_menu b on a.menu_id = b.id " +
             "inner join sys_t_user_role c on a.role_id = c.role_id " +
             " where c.user_id = #{userId} and b.billtype = #{billtype}")
-    List<String> searchUserBtn(Long userId, String billtype);
+    List<String> searchUserBtn(@Param("userId") Long userId, @Param("billtype") String billtype);
 
     /**
      * 根据用户查询所有具体的权限功能菜单信息
